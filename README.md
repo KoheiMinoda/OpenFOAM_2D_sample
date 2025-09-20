@@ -78,7 +78,7 @@ $1=="type" {
 grep -nA3 -E 'front|back|walls|cylinder|inlet|outlet' constant/polyMesh/boundary
 ```
 
-## メッシュ健全性チェック
+## メッシュチェック
 
 ```
 checkMesh
