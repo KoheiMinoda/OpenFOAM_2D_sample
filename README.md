@@ -1,3 +1,31 @@
+# ディレクトリ構成のイメージ
+
+```
+cylinder2D/
+├─ channel_cylinder.geo          ← Gmsh用ジオメトリ
+├─ mesh.msh                      ← （Gmsh出力で自動生成（3Dセルを含む .msh2））
+├─ 0/
+│  ├─ U                          ← 速度の初期・境界条件（inlet/outlet/walls/cylinder/front/back）
+│  └─ p                          ← 圧力の初期・境界条件（同上）
+├─ constant/
+│  ├─ physicalProperties         ← 物性（Newtonian, ν）
+│  ├─ turbulenceProperties       ← 乱流設定（laminar）
+│  └─ polyMesh/                  ← （gmshToFoam で自動生成）
+│     ├─ boundary
+│     ├─ faces
+│     ├─ neighbour
+│     ├─ owner
+│     └─ points
+├─ system/
+│  ├─ controlDict                ← 計算時間・書き出し間隔など
+│  ├─ fvSchemes                  ← 時間・空間離散スキーム（ddt/div/grad/laplacian 等）
+│  └─ fvSolution                 ← 連立方程式ソルバ設定（p/U, pFinal/UFinal を含む）
+└─ log.icoFoam                   ← （実行ログ）
+
+```
+
+# コマンド手順
+
 ## メッシュ生成 → OpenFOAM 変換
 
 ```
