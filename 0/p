@@ -17,7 +17,3 @@ boundaryField // 以下で境界条件を設定
     front { type symmetryPlane; } // 押し出し前面：対称面：2D 相当の仮定
     back { type symmetryPlane; } // 押し出し背面：対称面：2D 相当の仮定
 }
-
-// 「押し出し」とは厚み方向のこと
-// ここでは 2D の設定のため，厚み方向の速度成分 0, 厚み方向の勾配 0 を満たす必要がある
-// symmetryPlane ではそれを満たせる
