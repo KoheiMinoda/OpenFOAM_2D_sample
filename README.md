@@ -26,6 +26,12 @@ cylinder2D/
 
 # コマンド手順
 
+毎回のシェルで実行すると確か
+
+```
+source /opt/openfoam13/etc/bashrc
+```
+
 ## メッシュ生成 → OpenFOAM 変換
 
 ```
