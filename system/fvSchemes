@@ -6,29 +6,29 @@ FoamFile
     location "system";
     object fvSchemes;
 }
-ddtSchemes
+ddtSchemes // 時間微分（∂/∂t）の離散化スキーム設定
 {
-    default Euler;
+    default Euler; // ここでは前進オイラー
 }
-gradSchemes
+gradSchemes // 勾配 ∇ の評価スキーム設定
 {
-    default Gauss linear;
-    grad(U) Gauss linear;
-    grad(p) Gauss linear;
+    default Gauss linear; // 既定はガウスの発散定理＋線形補間
+    grad(U) Gauss linear; // 速度 U の勾配も同じく Gauss linear を使用
+    grad(p) Gauss linear; // 圧力 p の勾配も Gauss linear を使用
 }
-divSchemes
+divSchemes // 発散 ∇· の離散化スキーム設定
 {
-    div(phi,U) Gauss linearUpwind grad(U);
+    div(phi,U) Gauss linearUpwind grad(U); // 速度対流項：線形風上（linearUpwind）※grad(U) が必要
 }
-laplacianSchemes
+laplacianSchemes // ラプラシアン ∇·(Γ∇) の離散化スキーム
 {
-    default Gauss linear corrected;
+    default Gauss linear corrected; //  ガウス法＋線形、非直交補正（corrected）を有効化
 }
-interpolationSchemes
+interpolationSchemes // 補間スキーム（セル中心→面中心など）
 {
-    default linear;
+    default linear; // 既定は線形補間（二点線形）
 }
-snGradSchemes
+snGradSchemes // 面法線方向勾配（snGrad）の評価スキーム
 {
-    default corrected;
+    default corrected; // // 非直交補正あり（corrected）で精度を確保
 }
