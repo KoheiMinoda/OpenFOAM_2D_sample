@@ -6,11 +6,12 @@ FoamFile
     location "system";
     object controlDict;
 }
-application icoFoam;
+// 計算設定
+application icoFoam; // 使用するソルバ：icoFoam は非圧縮・非定常・層流向け
 startFrom startTime;
 startTime 0;
 endTime 10;
 deltaT 0.001;
 writeControl timeStep;
-writeInterval 200;
-purgeWrite 0;
+writeInterval 200; // 書き出し"ステップ"
+purgeWrite 0; // 古い出力の削除数：0 → 削除しない
