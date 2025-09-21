@@ -1,10 +1,10 @@
 FoamFile
 {
-    version 2.0;
-    format ascii;
-    class dictionary;
-    location "constant";
-    object physicalProperties;
+    version 2.0; // 固定
+    format ascii; // ファイルの表記形式
+    class dictionary; // このファイルのクラス
+    location "constant"; // このファイルを置いている相対パス
+    object physicalProperties; // ファイル名 / オブジェクト名
 }
-transportModel Newtonian;
-nu [0 2 -1 0 0 0 0] 1e-6;
+transportModel Newtonian; // 物性モデルの選択
+nu [0 2 -1 0 0 0 0] 1e-6; // 動粘性の定義：次元の設定 [0 2 -1 0 0 0 0] = m^2/s：値は 1e-6
