@@ -6,37 +6,37 @@ FoamFile
     location "system";
     object fvSolution;
 }
-solvers
+solvers // 線形方程式ソルバの設定ブロック
 {
-    p
+    p // 圧力（p）のソルバ設定
     {
-        solver PCG;
-        preconditioner DIC;
-        tolerance 1e-6;
-        relTol 0.01;
+        solver PCG; // ソルバ：PCG（前処理付き共役勾配法）
+        preconditioner DIC; // 前処理：DIC（Diagonal Incomplete Cholesky）
+        tolerance 1e-6; // 収束判定の絶対許容誤差
+        relTol 0.01; // 相対許容誤差（反復で緩く止める上限）
     }
-    pFinal
+    pFinal // 最終補正ステップ用の圧力ソルバ設定
     {
-        $p;
-        relTol 0;
+        $p; // 上の p 設定を継承（辞書置換）
+        relTol 0; // 最終ステップは相対許容誤差 0（厳密収束を狙う）
     }
 
-    U
+    U // 速度 U のソルバ設定
     {
-        solver PBiCGStab;
-        preconditioner DILU;
-        tolerance 1e-7;
-        relTol 0.01;
+        solver PBiCGStab; // ソルバ：PBiCGStab（双対共役勾配安定化法）
+        preconditioner DILU; // 前処理：DILU（対角不完全LU）
+        tolerance 1e-7; // 絶対許容誤差（pより厳しめ）
+        relTol 0.01; // 相対許容誤差
     }
-    UFinal
+    UFinal // 最終補正ステップ用の U ソルバ設定
     {
-        $U;
-        relTol 0;
+        $U; // 上の U 設定を継承（辞書置換）
+        relTol 0; // 最終ステップは相対許容誤差 0（厳密収束）
     }
 }
-PISO
+PISO // 非圧縮流れの PISO ループ設定
 {
-    nCorrectors 2;
-    nNonOrthogonalCorrectors 0;
-    momentumPredictor yes;
+    nCorrectors 2; // 圧力–速度の補正回数（PISO コレクタ数）
+    nNonOrthogonalCorrectors 0; // 非直交補正の回数（0：なし）
+    momentumPredictor yes; // 運動量予測ステップを実行するか（yes）
 }
