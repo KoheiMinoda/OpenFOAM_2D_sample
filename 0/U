@@ -1,19 +1,19 @@
 FoamFile
 {
-    version     2.0;
-    format      ascii;
-    class       volVectorField;
-    location    "0";
-    object      U;
+    version 2.0;
+    format ascii;
+    class volVectorField; // 体積セルの上のベクトル場：ここでは速度 U : "U" ファイルの由来
+    location "0";
+    object U;
 }
-dimensions      [0 1 -1 0 0 0 0];
-internalField   uniform (0 0 0);
-boundaryField
+dimensions [0 1 -1 0 0 0 0]; // 次元： L T^-1：速度の次元 m/s
+internalField uniform (0 0 0); // 初期値：領域全体で U=(0,0,0)
+boundaryField // 境界条件のブロック開始
 {
-    inlet   { type fixedValue;   value uniform (1 0 0); }
-    outlet  { type zeroGradient; }
-    walls   { type noSlip; }
-    cylinder{ type noSlip; }
-    front   { type symmetryPlane; }
-    back    { type symmetryPlane; }
+    inlet { type fixedValue; value uniform (1 0 0); } // 入口の速度を (1, 0, 0) m/s に固定
+    outlet { type zeroGradient; } // 出口の速度の法線勾配ゼロ：自然放出
+    walls { type noSlip; } // 上下の壁：壁面速度ゼロ
+    cylinder { type noSlip; } // 円柱の壁；壁面速度ゼロ
+    front { type symmetryPlane; }
+    back { type symmetryPlane; }
 }
