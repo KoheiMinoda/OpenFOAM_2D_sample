@@ -6,4 +6,4 @@ FoamFile
     location "constant";
     object turbulenceProperties;
 }
-simulationType laminar;
+simulationType laminar; // 乱流モデルの選択：laminar = 層流（乱流モデルは使わない）
