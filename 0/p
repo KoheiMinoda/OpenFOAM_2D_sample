@@ -1,19 +1,23 @@
 FoamFile
 {
-    version     2.0;
-    format      ascii;
-    class       volScalarField;
-    location    "0";
-    object      p;
+    version 2.0;
+    format ascii;
+    class volScalarField; // 体積セル上のスカラ場：ここでは圧力："p" ファイルの由来
+    location "0";
+    object p;
 }
-dimensions      [0 2 -2 0 0 0 0];
-internalField   uniform 0;
-boundaryField
+dimensions [0 2 -2 0 0 0 0]; // 次元：L^2 T^-2：運動学的圧力 p/rho の次元
+internalField uniform 0; // 初期値：ここでは領域全体で p=0 
+boundaryField // 以下で境界条件を設定
 {
-    inlet   { type zeroGradient; }
-    outlet  { type fixedValue; value uniform 0; }
-    walls   { type zeroGradient; }
-    cylinder{ type zeroGradient; }
-    front   { type symmetryPlane; }
-    back    { type symmetryPlane; }
+    inlet { type zeroGradient; } // 入口：圧力勾配 0
+    outlet { type fixedValue; value uniform 0; } // 出口：基準圧 p=0 を固定
+    walls { type zeroGradient; } // 上下の壁：圧力勾配ゼロ：法線方向の流束なし
+    cylinder { type zeroGradient; } // 円柱の壁：圧力勾配ゼロ
+    front { type symmetryPlane; } // 押し出し前面：対称面：2D 相当の仮定
+    back { type symmetryPlane; } // 押し出し背面：対称面：2D 相当の仮定
 }
+
+// 「押し出し」とは厚み方向のこと
+// ここでは 2D の設定のため，厚み方向の速度成分 0, 厚み方向の勾配 0 を満たす必要がある
+// symmetryPlane ではそれを満たせる
